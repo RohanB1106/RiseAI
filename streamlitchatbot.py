@@ -5,8 +5,7 @@ import os
 # Configure the Gemini API client first
 #api_key = os.getenv('GOOGLE_API_KEY')
 google_key = st.secrets["GOOGLE_API_KEY"]
-#if not api_key:
- #   st.error("Google API key not found. Please set the 'GOOGLE_API_KEY' environment variable.")
+
 # Now initialize the Gemini model
 model = genai.GenerativeModel('gemini-2.5-flash')
 # App UI
