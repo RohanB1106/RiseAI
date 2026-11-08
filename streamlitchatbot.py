@@ -3,11 +3,18 @@ import google.generativeai as genai
 import os
 
 # Configure the Gemini API client first
-#api_key = os.getenv('GOOGLE_API_KEY')
-google_key = st.secrets["GOOGLE_API_KEY"]
+try:
+    google_key = st.secrets.get("GOOGLE_API_KEY")
+except Exception:
+    google_key = None
+google_key = google_key or os.getenv("GOOGLE_API_KEY")
+if not google_key:
+    st.error("Google API key not found. Add GOOGLE_API_KEY to .streamlit/secrets.toml or your environment.")
+    st.stop()
+genai.configure(api_key=google_key)
 
 # Now initialize the Gemini model
-model = genai.GenerativeModel('gemini-2.5-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 # App UI
 st.title("AI-Powered Business Content Generator")
 
